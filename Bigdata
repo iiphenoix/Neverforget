@@ -1,0 +1,10 @@
+一、大数据之网络基础
+首先，大数据是基于分布式系统中，各个系统之间需要ping通，大部分采用Nat模式，设置他们的IP地址时，使他们的IP在同一网段中，于是各个系统间可以进行通信交流
+二、大数据之linux基础
+虚拟机装上三台linux操作系统，分别修改它们主机名和IP地址
+修改主机名：
+vi /etc/sysconfig/network
+修改IP地址：
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+
+熟悉基本的linux操作语句，如进入当前文件夹cd XX
