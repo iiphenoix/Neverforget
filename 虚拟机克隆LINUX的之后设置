@@ -1,0 +1,47 @@
+
+
+克隆虚拟机系统的IP修改问题
+解决方案：将eth0配置回来
+1.   
+修改  vi
+/etc/udev/rules.d/70-persistent-net.rules文件
+
+将PCI device 0x1022:0x2000 (vmxnet)用#注释，将PCI device
+0x1022:0x2000 (vmxnet)中的eth2修改为eth0，记住MAC地址ATTR{address}=="00:0c:29:ab:c5:2c"（原来eth1的地址），退出保存。
+2.   
+修改网卡配置文件vi /etc/sysconfig/network-scripts/ifcfg-eth0
+
+修改ip地址：IPADDR=192.168.0.102（因为我才用host-only的链接方式，所以是静态ip），修改MAC地址HWADDR=00:0C:29:AB:C5:2c，退出保存。
+3.   
+修改vi /etc/sysconfig/network文件中主机名 HOSTNAME=hadoop2
+4.   
+执行命令：service network restart，会出现eth0生效的提示信息。
+
+Bringing up interface eth0:  Active connection state: activating
+
+Active connection path: /org/freedesktop/NetworkManager/ActiveConnection/1
+
+state: activated
+
+Connection activated
+5.   
+最好reboot重启一下。
+
+伪分布式修改注意点
+
+1、（修改） vi /etc/host内容
+
+2、修改xml文件
+3、删除原来的tmp和logs文件
+
+
+
+无Datanode解决方案
+删除原来的tmp和logs文件，重新格式化namenode(./dfs namenode -format)
+
+
+
+ 
+
+
+
